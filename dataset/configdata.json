@@ -1,0 +1,75 @@
+{
+	"name": "configdata",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ADLSGen2_LinkedService",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"sourcePath": {
+				"type": "string"
+			},
+			"fileName": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": {
+					"value": "@dataset().fileName",
+					"type": "Expression"
+				},
+				"folderPath": {
+					"value": "@dataset().sourcePath",
+					"type": "Expression"
+				},
+				"fileSystem": "adls-container"
+			}
+		},
+		"schema": {
+			"type": "object",
+			"properties": {
+				"source": {
+					"type": "object",
+					"properties": {
+						"adlsPath": {
+							"type": "string"
+						},
+						"fileName": {
+							"type": "string"
+						}
+					}
+				},
+				"destination": {
+					"type": "object",
+					"properties": {
+						"serverName": {
+							"type": "string"
+						},
+						"databaseName": {
+							"type": "string"
+						},
+						"tableName": {
+							"type": "string"
+						}
+					}
+				},
+				"pipeline": {
+					"type": "object",
+					"properties": {
+						"batchSize": {
+							"type": "integer"
+						},
+						"copyBehavior": {
+							"type": "string"
+						}
+					}
+				}
+			}
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

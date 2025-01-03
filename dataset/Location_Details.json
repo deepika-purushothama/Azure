@@ -1,0 +1,27 @@
+{
+	"name": "Location_Details",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabaseLinkedService",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "LocationID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Region",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "LocationDetails"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

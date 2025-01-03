@@ -1,0 +1,12 @@
+{
+	"name": "AzureBlobStorage5",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "AzureBlobStorage",
+		"typeProperties": {
+			"connectionString": "DefaultEndpointsProtocol=https;AccountName=deepikastorage20;EndpointSuffix=core.windows.net;",
+			"encryptedCredential": "ew0KICAiVmVyc2lvbiI6ICIyMDE3LTExLTMwIiwNCiAgIlByb3RlY3Rpb25Nb2RlIjogIktleSIsDQogICJTZWNyZXRDb250ZW50VHlwZSI6ICJQbGFpbnRleHQiLA0KICAiQ3JlZGVudGlhbElkIjogIkRBVEFGQUNUT1JZQDI0QzZFRDNELUJBNDgtNEY3RS04OUU1LUFBREY5QkFFRjE0MF8zMzk1ZDE1OS1kOGU4LTQ2ZTEtYjk0Yi01OWE5MWZiODFlNjYiDQp9"
+		}
+	}
+}

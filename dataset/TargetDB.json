@@ -1,0 +1,40 @@
+{
+	"name": "TargetDB",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "targetsql",
+			"type": "LinkedServiceReference",
+			"parameters": {
+				"serverName": {
+					"value": "@dataset().serverName",
+					"type": "Expression"
+				},
+				"databaseName": {
+					"value": "@dataset().databaseName",
+					"type": "Expression"
+				}
+			}
+		},
+		"parameters": {
+			"tableName": {
+				"type": "string"
+			},
+			"databaseName": {
+				"type": "string"
+			},
+			"serverName": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [],
+		"typeProperties": {
+			"table": {
+				"value": "@dataset().tableName",
+				"type": "Expression"
+			}
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

@@ -1,0 +1,21 @@
+{
+	"name": "deepika20",
+	"properties": {
+		"globalParameters": {
+			"Environment": {
+				"type": "string",
+				"value": "Production"
+			},
+			"FileFormat": {
+				"type": "string",
+				"value": "csv"
+			}
+		}
+	},
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "924cadcc-db5e-4e8a-a5bc-34a22ff7f91a",
+		"tenantId": "818467cf-44b9-45a5-a41a-1ef924fcd795"
+	}
+}

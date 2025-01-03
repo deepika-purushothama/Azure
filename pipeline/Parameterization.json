@@ -1,0 +1,283 @@
+{
+	"name": "Parameterization",
+	"properties": {
+		"activities": [
+			{
+				"name": "LookupConfig",
+				"type": "Lookup",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "JsonSource",
+						"storeSettings": {
+							"type": "AzureBlobFSReadSettings",
+							"recursive": true,
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "JsonReadSettings"
+						}
+					},
+					"dataset": {
+						"referenceName": "configdata",
+						"type": "DatasetReference",
+						"parameters": {
+							"sourcePath": {
+								"value": "@pipeline().parameters.adlsPath",
+								"type": "Expression"
+							},
+							"fileName": {
+								"value": "@pipeline().parameters.fileName",
+								"type": "Expression"
+							}
+						}
+					}
+				}
+			},
+			{
+				"name": "Set_variable_adlsPath",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "LookupConfig",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "adlsPath",
+					"value": {
+						"value": "@activity('LookupConfig').output.firstRow.source.adlsPath\n",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "Set_variable_fileName",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "LookupConfig",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "fileName",
+					"value": {
+						"value": "@activity('LookupConfig').output.firstRow.source.fileName\n",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "Set_variable_tableName",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "LookupConfig",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "tableName",
+					"value": {
+						"value": "@activity('LookupConfig').output.firstRow.destination.tableName\n",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "Set_variable_serverName",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "LookupConfig",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "serverName",
+					"value": {
+						"value": "@activity('LookupConfig').output.firstRow.destination.serverName",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "Set_variable_DBName",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "LookupConfig",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "databaseName",
+					"value": {
+						"value": "@activity('LookupConfig').output.firstRow.destination.databaseName",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "Data flow1",
+				"type": "ExecuteDataFlow",
+				"dependsOn": [
+					{
+						"activity": "Set_variable_adlsPath",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "Set_variable_fileName",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "Set_variable_tableName",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "Set_variable_serverName",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "Set_variable_DBName",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataflow": {
+						"referenceName": "dataflow_Parameter",
+						"type": "DataFlowReference",
+						"parameters": {
+							"tableName": "\"TargetTable\"",
+							"batchSize": "1000"
+						},
+						"datasetParameters": {
+							"source1": {
+								"sourcePath": "@pipeline().parameters.adlsPath",
+								"fileName": {
+									"value": "@pipeline().parameters.fileName",
+									"type": "Expression"
+								}
+							},
+							"sink1": {
+								"tableName": {
+									"value": "@activity('LookupConfig').output.firstRow.destination.tableName\n",
+									"type": "Expression"
+								},
+								"databaseName": {
+									"value": "@activity('LookupConfig').output.firstRow.destination.databaseName",
+									"type": "Expression"
+								},
+								"serverName": {
+									"value": "@activity('LookupConfig').output.firstRow.destination.serverName",
+									"type": "Expression"
+								}
+							}
+						}
+					},
+					"compute": {
+						"coreCount": 8,
+						"computeType": "General"
+					},
+					"traceLevel": "Fine"
+				}
+			}
+		],
+		"parameters": {
+			"adlsPath": {
+				"type": "string"
+			},
+			"fileName": {
+				"type": "string"
+			},
+			"batchSize": {
+				"type": "int"
+			},
+			"copyBehavior": {
+				"type": "string"
+			}
+		},
+		"variables": {
+			"adlsPath": {
+				"type": "String"
+			},
+			"fileName": {
+				"type": "String"
+			},
+			"tableName": {
+				"type": "String"
+			},
+			"serverName": {
+				"type": "String"
+			},
+			"databaseName": {
+				"type": "String"
+			}
+		},
+		"annotations": [],
+		"lastPublishTime": "2025-01-01T07:30:06Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}
