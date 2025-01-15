@@ -1,0 +1,19 @@
+{
+	"name": "finalsampledata",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ADLSLinkedservice",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileSystem": "DemoFinal"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": []
+	}
+}
