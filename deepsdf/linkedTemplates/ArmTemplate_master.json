@@ -1,0 +1,332 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "deepsdf"
+		},
+		"ADLSGen2_LinkedService_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'ADLSGen2_LinkedService'"
+		},
+		"ADLSLinkedservice_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'ADLSLinkedservice'"
+		},
+		"AzureBlobStorage1_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage1'"
+		},
+		"AzureBlobStorage5_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage5'"
+		},
+		"AzureDataLakeStorage1_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'AzureDataLakeStorage1'"
+		},
+		"AzureDestinationDB_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'AzureDestinationDB'"
+		},
+		"AzureSqlDatabaseLinkedService_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'AzureSqlDatabaseLinkedService'"
+		},
+		"CSVfiles_DataLake_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'CSVfiles_DataLake'"
+		},
+		"ParquetFile_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'ParquetFile'"
+		},
+		"SqlServer1_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'SqlServer1'"
+		},
+		"samplelinkedservice_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'samplelinkedservice'"
+		},
+		"targetsql_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'targetsql'"
+		},
+		"ADLSGen2_LinkedService_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://deepikastorage20.dfs.core.windows.net/"
+		},
+		"ADLSLinkedservice_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://deepsstorage18.dfs.core.windows.net/"
+		},
+		"AzureDataLakeStorage1_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://deepikastorage20.dfs.core.windows.net/"
+		},
+		"AzureDestinationDB_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "deepika2000.database.windows.net"
+		},
+		"AzureDestinationDB_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "DestinationDB_deepika"
+		},
+		"AzureDestinationDB_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "cloudtraining"
+		},
+		"AzureSqlDatabaseLinkedService_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "deepika2000.database.windows.net"
+		},
+		"AzureSqlDatabaseLinkedService_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "cloudtraining"
+		},
+		"AzureSqlDatabaseLinkedService_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "cloudtraining"
+		},
+		"CSVfiles_DataLake_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://deepikastorage20.dfs.core.windows.net/"
+		},
+		"Databricks_formula1_properties_typeProperties_existingClusterId": {
+			"type": "string",
+			"defaultValue": "0128-071404-6mvirclp"
+		},
+		"ParquetFile_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://deepikastorage20.dfs.core.windows.net/"
+		},
+		"SqlServer1_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "DESKTOP-RI8J1V5\\SQLEXPRESS"
+		},
+		"SqlServer1_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "cloudtraining"
+		},
+		"SqlServer1_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "deeps"
+		},
+		"targetsql_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "@{linkedService().serverName}"
+		},
+		"targetsql_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "@{linkedService().databaseName}"
+		},
+		"targetsql_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "cloudtraining"
+		},
+		"containerUri": {
+			"type": "string",
+			"metadata": "URI to storage account containing linked ARM templates"
+		},
+		"containerSasToken": {
+			"type": "string",
+			"metadata": "Sas token to storage account containing linked ARM templates"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "deepsdf_ArmTemplate_0",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2024-03-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_0.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"ADLSGen2_LinkedService_accountKey": {
+						"value": "[parameters('ADLSGen2_LinkedService_accountKey')]"
+					},
+					"ADLSLinkedservice_accountKey": {
+						"value": "[parameters('ADLSLinkedservice_accountKey')]"
+					},
+					"AzureBlobStorage1_connectionString": {
+						"value": "[parameters('AzureBlobStorage1_connectionString')]"
+					},
+					"AzureBlobStorage5_connectionString": {
+						"value": "[parameters('AzureBlobStorage5_connectionString')]"
+					},
+					"AzureDataLakeStorage1_accountKey": {
+						"value": "[parameters('AzureDataLakeStorage1_accountKey')]"
+					},
+					"AzureDestinationDB_password": {
+						"value": "[parameters('AzureDestinationDB_password')]"
+					},
+					"AzureSqlDatabaseLinkedService_password": {
+						"value": "[parameters('AzureSqlDatabaseLinkedService_password')]"
+					},
+					"CSVfiles_DataLake_accountKey": {
+						"value": "[parameters('CSVfiles_DataLake_accountKey')]"
+					},
+					"ParquetFile_accountKey": {
+						"value": "[parameters('ParquetFile_accountKey')]"
+					},
+					"ADLSGen2_LinkedService_properties_typeProperties_url": {
+						"value": "[parameters('ADLSGen2_LinkedService_properties_typeProperties_url')]"
+					},
+					"ADLSLinkedservice_properties_typeProperties_url": {
+						"value": "[parameters('ADLSLinkedservice_properties_typeProperties_url')]"
+					},
+					"AzureDataLakeStorage1_properties_typeProperties_url": {
+						"value": "[parameters('AzureDataLakeStorage1_properties_typeProperties_url')]"
+					},
+					"AzureDestinationDB_properties_typeProperties_server": {
+						"value": "[parameters('AzureDestinationDB_properties_typeProperties_server')]"
+					},
+					"AzureDestinationDB_properties_typeProperties_database": {
+						"value": "[parameters('AzureDestinationDB_properties_typeProperties_database')]"
+					},
+					"AzureDestinationDB_properties_typeProperties_userName": {
+						"value": "[parameters('AzureDestinationDB_properties_typeProperties_userName')]"
+					},
+					"AzureSqlDatabaseLinkedService_properties_typeProperties_server": {
+						"value": "[parameters('AzureSqlDatabaseLinkedService_properties_typeProperties_server')]"
+					},
+					"AzureSqlDatabaseLinkedService_properties_typeProperties_database": {
+						"value": "[parameters('AzureSqlDatabaseLinkedService_properties_typeProperties_database')]"
+					},
+					"AzureSqlDatabaseLinkedService_properties_typeProperties_userName": {
+						"value": "[parameters('AzureSqlDatabaseLinkedService_properties_typeProperties_userName')]"
+					},
+					"CSVfiles_DataLake_properties_typeProperties_url": {
+						"value": "[parameters('CSVfiles_DataLake_properties_typeProperties_url')]"
+					},
+					"Databricks_formula1_properties_typeProperties_existingClusterId": {
+						"value": "[parameters('Databricks_formula1_properties_typeProperties_existingClusterId')]"
+					},
+					"ParquetFile_properties_typeProperties_url": {
+						"value": "[parameters('ParquetFile_properties_typeProperties_url')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "deepsdf_ArmTemplate_1",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2024-03-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_1.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"samplelinkedservice_connectionString": {
+						"value": "[parameters('samplelinkedservice_connectionString')]"
+					},
+					"targetsql_password": {
+						"value": "[parameters('targetsql_password')]"
+					},
+					"targetsql_properties_typeProperties_server": {
+						"value": "[parameters('targetsql_properties_typeProperties_server')]"
+					},
+					"targetsql_properties_typeProperties_database": {
+						"value": "[parameters('targetsql_properties_typeProperties_database')]"
+					},
+					"targetsql_properties_typeProperties_userName": {
+						"value": "[parameters('targetsql_properties_typeProperties_userName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'deepsdf_ArmTemplate_0')]"
+			]
+		},
+		{
+			"name": "deepsdf_ArmTemplate_2",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2024-03-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_2.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"SqlServer1_password": {
+						"value": "[parameters('SqlServer1_password')]"
+					},
+					"SqlServer1_properties_typeProperties_server": {
+						"value": "[parameters('SqlServer1_properties_typeProperties_server')]"
+					},
+					"SqlServer1_properties_typeProperties_database": {
+						"value": "[parameters('SqlServer1_properties_typeProperties_database')]"
+					},
+					"SqlServer1_properties_typeProperties_userName": {
+						"value": "[parameters('SqlServer1_properties_typeProperties_userName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'deepsdf_ArmTemplate_1')]"
+			]
+		},
+		{
+			"name": "deepsdf_ArmTemplate_3",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2024-03-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_3.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'deepsdf_ArmTemplate_2')]"
+			]
+		},
+		{
+			"name": "deepsdf_ArmTemplate_4",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2024-03-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_4.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'deepsdf_ArmTemplate_3')]"
+			]
+		}
+	]
+}

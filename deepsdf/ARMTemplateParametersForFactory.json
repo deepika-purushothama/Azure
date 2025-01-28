@@ -1,0 +1,99 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "deepsdf"
+		},
+		"ADLSGen2_LinkedService_accountKey": {
+			"value": ""
+		},
+		"ADLSLinkedservice_accountKey": {
+			"value": ""
+		},
+		"AzureBlobStorage1_connectionString": {
+			"value": ""
+		},
+		"AzureBlobStorage5_connectionString": {
+			"value": ""
+		},
+		"AzureDataLakeStorage1_accountKey": {
+			"value": ""
+		},
+		"AzureDestinationDB_password": {
+			"value": ""
+		},
+		"AzureSqlDatabaseLinkedService_password": {
+			"value": ""
+		},
+		"CSVfiles_DataLake_accountKey": {
+			"value": ""
+		},
+		"ParquetFile_accountKey": {
+			"value": ""
+		},
+		"SqlServer1_password": {
+			"value": ""
+		},
+		"samplelinkedservice_connectionString": {
+			"value": ""
+		},
+		"targetsql_password": {
+			"value": ""
+		},
+		"ADLSGen2_LinkedService_properties_typeProperties_url": {
+			"value": "https://deepikastorage20.dfs.core.windows.net/"
+		},
+		"ADLSLinkedservice_properties_typeProperties_url": {
+			"value": "https://deepsstorage18.dfs.core.windows.net/"
+		},
+		"AzureDataLakeStorage1_properties_typeProperties_url": {
+			"value": "https://deepikastorage20.dfs.core.windows.net/"
+		},
+		"AzureDestinationDB_properties_typeProperties_server": {
+			"value": "deepika2000.database.windows.net"
+		},
+		"AzureDestinationDB_properties_typeProperties_database": {
+			"value": "DestinationDB_deepika"
+		},
+		"AzureDestinationDB_properties_typeProperties_userName": {
+			"value": "cloudtraining"
+		},
+		"AzureSqlDatabaseLinkedService_properties_typeProperties_server": {
+			"value": "deepika2000.database.windows.net"
+		},
+		"AzureSqlDatabaseLinkedService_properties_typeProperties_database": {
+			"value": "cloudtraining"
+		},
+		"AzureSqlDatabaseLinkedService_properties_typeProperties_userName": {
+			"value": "cloudtraining"
+		},
+		"CSVfiles_DataLake_properties_typeProperties_url": {
+			"value": "https://deepikastorage20.dfs.core.windows.net/"
+		},
+		"Databricks_formula1_properties_typeProperties_existingClusterId": {
+			"value": "0128-071404-6mvirclp"
+		},
+		"ParquetFile_properties_typeProperties_url": {
+			"value": "https://deepikastorage20.dfs.core.windows.net/"
+		},
+		"SqlServer1_properties_typeProperties_server": {
+			"value": "DESKTOP-RI8J1V5\\SQLEXPRESS"
+		},
+		"SqlServer1_properties_typeProperties_database": {
+			"value": "cloudtraining"
+		},
+		"SqlServer1_properties_typeProperties_userName": {
+			"value": "deeps"
+		},
+		"targetsql_properties_typeProperties_server": {
+			"value": "@{linkedService().serverName}"
+		},
+		"targetsql_properties_typeProperties_database": {
+			"value": "@{linkedService().databaseName}"
+		},
+		"targetsql_properties_typeProperties_userName": {
+			"value": "cloudtraining"
+		}
+	}
+}
